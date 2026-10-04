@@ -18,6 +18,11 @@ $problemPath = Join-Path $problemDirectory $slug
 $templateSolution = Join-Path $projectRoot "templates/solution.cpp"
 $templateNotes = Join-Path $projectRoot "templates/notes.md"
 
+if (Test-Path $problemPath) {
+    Write-Error "Problem already exists: $Difficulty/$slug"
+    exit 1
+}
+
 New-Item -ItemType Directory -Path $problemPath | Out-Null
 
 Copy-Item $templateSolution (Join-Path $problemPath "sol.cpp")
