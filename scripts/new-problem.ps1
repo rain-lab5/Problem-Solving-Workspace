@@ -10,11 +10,17 @@ param(
 $slug = $Name.ToLower() -replace '[^a-z0-9]+', '-'
 $slug = $slug.Trim('-')
 
-$problemPath = Join-Path $Difficulty $slug
+$projectRoot = Split-Path -Parent $PSScriptRoot
+
+$problemDirectory = Join-Path $projectRoot $Difficulty
+$problemPath = Join-Path $problemDirectory $slug
+
+$templateSolution = Join-Path $projectRoot "templates/solution.cpp"
+$templateNotes = Join-Path $projectRoot "templates/notes.md"
 
 New-Item -ItemType Directory -Path $problemPath | Out-Null
 
-Copy-Item "templates/solution.cpp" "$problemPath/sol.cpp"
-Copy-Item "templates/notes.md" "$problemPath/notes.md"
+Copy-Item $templateSolution (Join-Path $problemPath "sol.cpp")
+Copy-Item $templateNotes (Join-Path $problemPath "notes.md")
 
 Write-Host "Created problem: $Difficulty/$slug"
