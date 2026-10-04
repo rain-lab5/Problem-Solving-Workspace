@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 if [ "$#" -ne 2 ]; then
-    echo "Usage: $0 <problem-name> <difficulty>"
+    echo "Usage: $0 \"<problem-name>\" <easy|medium|hard>"
     exit 1
 fi
 
 name="$1"
-difficulty="$2"
+difficulty="$(printf '%s' "$2" | tr '[:upper:]' '[:lower:]')"
 
 case "$difficulty" in
     easy|medium|hard)
@@ -19,7 +19,12 @@ case "$difficulty" in
         ;;
 esac
 
-slug=$(echo "$name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]\+/-/g' | sed 's/^-//;s/-$//')
+slug=$(printf '%s' "$name" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]\+/-/g' | sed 's/^-//;s/-$//')
+
+if [ -z "$slug" ]; then
+    echo "Error: problem name cannot be empty."
+    exit 1
+fi
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 project_root="$(dirname "$script_dir")"

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+if command -v pwsh >/dev/null 2>&1; then
+    exec pwsh -File "$script_dir/scripts/new-problem.ps1" "$@"
+fi
+
+if command -v powershell.exe >/dev/null 2>&1; then
+    exec powershell.exe -ExecutionPolicy Bypass -File "$script_dir/scripts/new-problem.ps1" "$@"
+fi
+
+exec "$script_dir/scripts/new-problem.sh" "$@"
