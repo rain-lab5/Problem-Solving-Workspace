@@ -25,13 +25,10 @@ From the project root, run:
     ```Bash
   ./new-problem "Problem Name" easy
   ```
-
   ```PS
 - PowerShell / Command Prompt:
   new-problem "Problem Name" easy
   ```
-
-  
 If the command is not found in your shell, add the workspace root to PATH:
 
 - Bash / zsh:
