@@ -1,0 +1,36 @@
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Compiled / generated artifacts
+*.exe
+*.out
+*.o
+*.obj
+*.dll
+*.so
+*.dylib
+*.class
+*.log
+
+# Local/private files
+.env
+.env.*
+*.local
+*.secret
+private/
+notes-private/
+
+# Common temporary folders
+bin/
+build/
+out/
+target/
